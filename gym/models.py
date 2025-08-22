@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 
 from config import settings
 
@@ -28,11 +29,6 @@ class Gym(models.Model):
     name = models.CharField(max_length=100)
     address = models.TextField()
     capacity = models.PositiveIntegerField()
-    staff = models.ManyToManyField(
-        settings.AUTH_USER_MODEL,
-        related_name="gyms",
-        limit_choices_to={"role": ("trainer", "admin")},
-    )
     description = models.TextField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -43,34 +39,39 @@ class Gym(models.Model):
 
 class WorkoutSession(models.Model):
     """
-    Represents a session for a workout, managed within a gym context.
+    Represents a workout session organized at a gym.
 
-    Provides functionality to manage, validate, and determine session status,
-    such as availability, bookings, and whether the session is fully booked.
-    Each workout session is associated with a gym and a trainer.
+    This class is used to store and manage details about a workout session,
+    including information such as the title, description, associated gym,
+    trainer, clients, schedule, and capacity. It includes functionality
+    to determine session availability and enforce business rules such as
+    the duration of the session and maximum participant limits.
 
-    :ivar title: The title of the workout session.
+    :ivar title: The name of the workout session.
     :type title: str
-    :ivar description: Detailed description of the workout session.
+    :ivar description: A description of the workout session.
     :type description: str
-    :ivar gym: Reference to the associated gym for the session.
+    :ivar gym: The gym associated with this session.
     :type gym: Gym
-    :ivar trainer: The trainer conducting the session, restricted to users
-        with a "trainer" role.
-    :type trainer: AUTH_USER_MODEL
-    :ivar start_time: The start time of the workout session.
+    :ivar trainer: The trainer conducting the workout session. Limited
+        to users with the role of "trainer".
+    :type trainer: settings.AUTH_USER_MODEL
+    :ivar clients: The clients enrolled in this workout session. Limited
+        to users with the role of "client". Many-to-many relationship
+        connected through the Booking model.
+    :type clients: settings.AUTH_USER_MODEL
+    :ivar start_time: The starting date and time of the workout session.
     :type start_time: datetime
-    :ivar end_time: The end time of the workout session.
+    :ivar end_time: The ending date and time of the workout session.
     :type end_time: datetime
-    :ivar price: The cost of attending the workout session.
+    :ivar price: The price of the workout session in currency units,
+        represented as a positive integer.
     :type price: int
-    :ivar max_participants: The maximum number of participants allowed in the
-        session. Defaults to 10.
+    :ivar max_participants: The maximum number of participants allowed
+        in the session. Defaults to 10 if not explicitly set.
     :type max_participants: int
-    :ivar is_active: Indicates whether the session is open for bookings.
-        Defaults to True.
-    :type is_active: bool
-    :ivar created_at: The timestamp when the session was created.
+    :ivar created_at: The timestamp of when the workout session was
+        created.
     :type created_at: datetime
     """
     title = models.CharField(max_length=100)
@@ -83,15 +84,30 @@ class WorkoutSession(models.Model):
     trainer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="sessions",
+        related_name="trainer_sessions",
         limit_choices_to={"role": "trainer"},
+    )
+    clients = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="client_sessions",
+        limit_choices_to={"role": "client"},
+        through="Booking",
     )
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     price = models.PositiveIntegerField()
     max_participants = models.PositiveIntegerField(default=10)
-    is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def is_active(self):
+
+        now = timezone.now()
+        if now > self.end_time:
+            return False
+        if self.is_fully_booked():
+            return False
+        return True
 
     def get_available_spots(self):
         booked_count = self.bookings.filter(is_paid=True).count()
@@ -149,8 +165,8 @@ class Booking(models.Model):
         related_name="bookings",
     )
     is_paid = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата створення")
-    paid_at = models.DateTimeField(blank=True, null=True, verbose_name="Дата оплати")
+    created_at = models.DateTimeField(auto_now_add=True)
+    paid_at = models.DateTimeField(blank=True, null=True)
 
 
     def clean(self):

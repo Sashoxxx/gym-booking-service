@@ -59,12 +59,7 @@ class Account(models.Model):
     :type balance: models.PositiveIntegerField
     :ivar created_at: The timestamp indicating when the account was created.
     :type created_at: models.DateTimeField
-
-    :method add_money: Adds the specified positive amount to the account balance.
-    :method spend_money: Attempts to spend the specified amount if sufficient balance exists.
-    :method clean: Validates account relationships and sets the appropriate account type.
-    :method save: Performs full validation before saving the account instance.
-    :method __str__: Returns a string representation of the account with type and balance.
+    
     """
     class Types(models.TextChoices):
         GYM = "gym", "Gym"
@@ -121,9 +116,9 @@ class Account(models.Model):
                 "Account must have either a user or a gym"
             )
         if self.user:
-            self.account_type = 'user'
+            self.account_type = "user"
         elif self.gym:
-            self.account_type = 'gym'
+            self.account_type = "gym"
 
     def save(self, *args, **kwargs):
         self.full_clean()
