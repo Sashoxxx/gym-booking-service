@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ profile_user.username }} ({{ profile_user.get_role_display }})</h2>
+<p>Email: {{ profile_user.email }}</p>
+<p>Balance: {{ account_balance }}</p>
+  {% if request.user == profile_user %}
+    <a href="{% url 'users:add-balance' %}" class="btn btn-success mt-2">Add Balance</a>
+{% endif %}
+
+{% if profile_user.role == "client" %}
+    <h3>Recent Bookings</h3>
+    <ul>
+    {% for booking in recent_bookings %}
+        <li>{{ booking.session.title }} at {{ booking.session.gym.name }} on {{ booking.session.start_time }}</li>
+    {% empty %}
+        <li>No bookings yet</li>
+    {% endfor %}
+    </ul>
+{% elif profile_user.role == "trainer" %}
+    <h3>Recent Sessions</h3>
+    <ul>
+    {% for session in recent_sessions %}
+        <li>{{ session.title }} at {{ session.gym.name }} on {{ session.start_time }}</li>
+    {% empty %}
+        <li>No sessions yet</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

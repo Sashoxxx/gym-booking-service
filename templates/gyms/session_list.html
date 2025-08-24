@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Sessions for {{ gym.name }}</h2>
+
+<p><b>Total sessions:</b> {{ sessions|length }}</p>
+
+<ul>
+  {% for session in sessions %}
+    <li>
+      <b>{{ session.title }}</b>
+      ({{ session.start_time|date:"d.m.Y H:i" }} – {{ session.end_time|date:"H:i" }})
+      — Trainer: {{ session.trainer }} - Price: {{ session.price }} $
+
+      {% if user.is_authenticated %}
+          {% if user.role == "admin" or user.is_superuser %}
+              <a href="{% url 'gyms:workout-session-update' session.pk %}">Edit</a>
+          {% elif user.role == "trainer" and session.trainer == user %}
+              <a href="{% url 'gyms:workout-session-update' session.pk %}">Edit</a>
+          {% endif %}
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>No sessions yet for this gym.</li>
+  {% endfor %}
+</ul>
+
+{% if user.is_authenticated %}
+    {% if user.role == "trainer" or user.role == "admin" or user.is_superuser %}
+        <a href="{% url 'gyms:workout-session-create' gym.pk %}" class="btn btn-primary mt-3">Add session</a>
+    {% endif %}
+{% endif %}
+
+<a href="{% url 'gyms:gym-detail' gym.pk %}" class="btn btn-secondary mt-2">Back to Gym</a>
+{% endblock %}

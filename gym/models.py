@@ -116,15 +116,11 @@ class WorkoutSession(models.Model):
     def is_fully_booked(self):
         return self.get_available_spots() <= 0
 
-    def clean(self):
-        if self.end_time <= self.start_time:
-            raise ValidationError("Time period must start before it ends")
-
-        if self.max_participants > self.gym.capacity:
-            raise ValidationError("Maximum number of participants cannot exceed gym capacity")
 
     def __str__(self):
-        return f"{self.title} - {self.gym.name} ({self.start_time.strftime('%d.%m.%Y %H:%M')})"
+        gym_name = self.gym.name if self.gym else "No Gym"
+        start_time_str = self.start_time.strftime('%d.%m.%Y %H:%M') if self.start_time else "No Time"
+        return f"{self.title} - {gym_name} ({start_time_str})"
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -190,4 +186,3 @@ class Booking(models.Model):
     class Meta:
         unique_together = ["user", "session"]
         ordering = ["-created_at"]
-

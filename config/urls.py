@@ -8,7 +8,8 @@ from gym.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", index, name="index"),
-    path("gym/", include("gym.urls", namespace="gym")),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("gyms/", include("gym.urls", namespace="gyms")),
     path("users/", include("users.urls", namespace="users")),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

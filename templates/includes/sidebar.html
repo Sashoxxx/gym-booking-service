@@ -1,0 +1,35 @@
+<ul class="sidebar-nav list-group">
+  {% if user.is_authenticated %}
+    <li class="list-group-item">
+      User: <a href="{% url 'users:user-detail' user.pk %}">{{ user.get_username }}</a>
+    </li>
+    <li class="list-group-item">
+      <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn-danger">Logout</button>
+      </form>
+    </li>
+  {% else %}
+    <li class="list-group-item btn btn-primary">
+      <a href="{% url 'login'%}?next={{request.path}}">Login</a>
+    </li>
+  {% endif %}
+
+  <br>
+
+  <li class="list-group-item"><a href="/" class="btn btn-success w-100">Home</a></li>
+  <li class="list-group-item"><a href="{% url 'gyms:gym-list' %}" class="btn btn-success w-100">Gyms</a></li>
+
+  {% if user.is_authenticated %}
+    {% if user.is_superuser or user.role == ADMIN %}
+    <li class="list-group-item">
+      <a href="{% url 'users:create-staff' %}" class="btn btn-success w-100">
+        ➕ Create Staff</a>
+    </li>
+      <li class="list-group-item">
+       <a href="{% url 'users:user-list' %}" class="btn btn-success w-100">
+        Users list</a>
+      </li>
+      {% endif %}
+  {% endif %}
+</ul>

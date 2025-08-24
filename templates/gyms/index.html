@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Our Pride</h1>
+<br>
+
+<p>Залів = {{ num_gyms }}</p>
+<p>Інструкторів = {{ total_trainers }}</p>
+<p>Задоволених клієнтів = {{ total_clients }}</p>
+
+{% if not user.is_authenticated %}
+  <a href="{% url 'login' %}">Login</a>
+  <br>
+  <a href="{% url 'users:user-create' %}">Signup</a>
+{% else %}
+  <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+{% endif %}
+  <h3>You are here for {{ num_visits }} time{{ num_visits|pluralize }}</h3>
+
+{% endblock %}

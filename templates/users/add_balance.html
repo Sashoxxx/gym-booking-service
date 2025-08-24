@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Add Balance</h2>
+    <p>Current balance: <b>{{ request.user.account.balance }}</b></p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success mt-2">Add</button>
+    </form>
+
+    <a href="{% url 'users:user-detail' pk=request.user.pk %}" class="btn btn-secondary mt-3">Back to Profile</a>
+</div>
+{% endblock %}

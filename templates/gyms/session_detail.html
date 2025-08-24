@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ session.title }}</h1>
+<p><strong>Description:</strong> {{ session.description }}</p>
+<p><strong>Trainer:</strong> {{ session.trainer.username }}</p>
+<p><strong>Start time:</strong> {{ session.start_time }}</p>
+<p><strong>Duration</strong> {{ session.start_time }} - {{ session.end_time }}</p>
+<p><strong>Price:</strong> {{ session.price }} $</p>
+<p><strong>Available spots:</strong> {{ session.get_available_spots }}</p>
+<p><strong>Status:</strong>
+    {% if session.is_fully_booked %}
+        Fully booked
+    {% elif not session.is_active %}
+        Inactive
+    {% else %}
+        Available
+    {% endif %}
+</p>
+
+{% endblock %}

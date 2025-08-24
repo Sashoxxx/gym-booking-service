@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Delete Gym</h2>
+<p>Are you sure you want to delete "{% if model_name  == "gym"  %}{{ object.name }}{% else %} {{ object.title }} {% endif %}"?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Yes, delete</button>
+  {% if model_name  == "gym" %}
+    <a href="{% url 'gyms:gym-list' %}" class="btn btn-secondary">Cancel</a>
+  {% endif %}
+  {% if model_name == ""  %}
+
+</form>
+{% endblock %}

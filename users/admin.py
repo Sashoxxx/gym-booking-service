@@ -19,6 +19,16 @@ class CustomUserAdmin(admin.ModelAdmin):
     list_filter = ("role", "is_staff", "is_superuser")
     search_fields = ("username", "email")
 
+    def has_change_permission(self, request, obj=None):
+        if obj is not None:
+            return obj == request.user or request.user.is_superuser
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        if obj is not None:
+            return obj == request.user or request.user.is_superuser
+        return False
+
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):

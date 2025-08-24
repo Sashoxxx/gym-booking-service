@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Gyms</h2>
+<ul>
+  {% for gym in gyms %}
+    <li>
+      <a href="{% url 'gyms:gym-detail' gym.pk %}">{{ gym.name }}</a>
+    </li>
+  {% empty %}
+    <li>No gyms yet</li>
+  {% endfor %}
+</ul>
+
+{% if user.is_authenticated %}
+  {% if user.is_superuser or user.role == "admin" %}
+  <a href="{% url 'gyms:gym-create' %}" class="btn btn-success">Add Gym</a>
+    {% endif %}
+{% endif %}
+{% endblock %}

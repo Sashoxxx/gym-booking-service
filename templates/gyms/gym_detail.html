@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ gym.name }}</h2>
+<p><b>Address:</b> {{ gym.address }}</p>
+<p><b>Capacity:</b> {{ gym.capacity }}</p>
+<p>{{ gym.description }}</p>
+
+{% if user.is_authenticated and user.role == "admin" or user.is_superuser %}
+  <a href="{% url 'gyms:gym-update' gym.pk %}" class="btn btn-warning">Edit</a>
+  <a href="{% url 'gyms:gym-delete' gym.pk %}" class="btn btn-danger">Delete</a>
+  <a href="{% url 'gyms:workout-session-create' gym.pk %}" class="btn btn-primary">Add session</a>
+{% endif %}
+  <a href="{% url 'gyms:workout-session-list' gym.pk %}" class="btn btn-info mt-3">View Sessions</a>
+{% endblock %}
