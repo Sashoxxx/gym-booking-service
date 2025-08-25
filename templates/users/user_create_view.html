@@ -3,10 +3,17 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1> {{ view.form_type }} {{ view.verbose_name }}</h1>
-  <form action="" method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+<div class="container py-5 d-flex justify-content-center">
+  <div class="card shadow-sm rounded p-4" style="max-width: 500px; width: 100%;">
+    <h2 class="card-title mb-4 text-center">{{ view.form_type }} {{ view.verbose_name }}</h2>
+
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock %}

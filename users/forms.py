@@ -49,7 +49,15 @@ class StaffUserCreationForm(UserCreationForm):
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ("username", "email", "phone_number", "password1", "password2")
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "phone_number",
+            "password1",
+            "password2"
+        )
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -59,10 +67,16 @@ class CustomUserCreationForm(UserCreationForm):
         return user
 
 
-class CustomUserUpdateForm(forms.ModelForm):
+class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ("first_name", "last_name", "email", "phone_number")
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "phone_number"
+        )
 
 
 class AddBalanceForm(forms.Form):

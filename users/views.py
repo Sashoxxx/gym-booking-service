@@ -1,9 +1,12 @@
+
 from django.contrib.auth import get_user_model
+
 from django.contrib.auth.mixins import (
     PermissionRequiredMixin,
     LoginRequiredMixin,
     UserPassesTestMixin
 )
+from django.db import transaction
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -14,12 +17,14 @@ from django.views.generic import (
     DeleteView,
     FormView
 )
+
 from users.forms import (
     UserSearchForm,
     CustomUserCreationForm,
-    CustomUserUpdateForm,
+
     AddBalanceForm,
     StaffUserCreationForm,
+    UserUpdateForm,
 )
 from users.models import Account
 
@@ -57,34 +62,75 @@ class UserListView(PermissionRequiredMixin, ListView):
         return context
 
 class UserDetailView(DetailView):
+    # model = User
+    # template_name = "users/user_detail.html"
+    # context_object_name = "profile_user"
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     user = self.get_object()
+    #     context["username"] = user.username
+    #     context["email"] = user.email
+    #     context["first_name"] = user.first_name
+    #     context["last_name"] = user.last_name
+    #     context["phone_number"] = user.phone_number
+    #     context["role"] = user.get_role_display()
+    #     context["account_balance"] = getattr(user.account, "balance", 0)
+    #
+    #     if user.role == User.Roles.CLIENT:
+    #         context["recent_bookings"] = (
+    #             user.bookings
+    #             .select_related("session", "session__gym")
+    #             .order_by("-created_at")[:5]
+    #         )
+    #
+    #     elif user.role == User.Roles.TRAINER:
+    #         context["recent_sessions"] = (
+    #             user.trainer_sessions
+    #             .select_related("gym")
+    #             .order_by("-start_time")[:5]
+    #         )
+    #     return context
     model = User
     template_name = "users/user_detail.html"
     context_object_name = "profile_user"
 
+    def get_object(self, queryset=None):
+        # Підтягуємо акаунт разом із користувачем, щоб уникнути додаткового запиту
+        queryset = self.model.objects.select_related('account')
+        return super().get_object(queryset=queryset)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = self.get_object()
-        context["username"] = user.username
-        context["email"] = user.email
-        context["first_name"] = user.first_name
-        context["last_name"] = user.last_name
-        context["phone_number"] = user.phone_number
-        context["role"] = user.get_role_display()
-        context["account_balance"] = getattr(user.account, "balance", 0)
+        user = self.object
 
+        # Основна інформація про користувача
+        context.update({
+            "username": user.username,
+            "email": user.email,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "phone_number": user.phone_number,
+            "role": user.get_role_display(),
+            "account_balance": getattr(user.account, "balance", 0),
+        })
+
+        # Недавні бронювання для клієнта
         if user.role == User.Roles.CLIENT:
             context["recent_bookings"] = (
                 user.bookings
-                .select_related("session", "session__gym")
+                .select_related("session__gym")  # session і gym витягуються одним JOIN
                 .order_by("-created_at")[:5]
             )
 
+        # Недавні сесії для тренера
         elif user.role == User.Roles.TRAINER:
             context["recent_sessions"] = (
                 user.trainer_sessions
                 .select_related("gym")
                 .order_by("-start_time")[:5]
             )
+
         return context
 
 class StaffUserCreateView(UserPassesTestMixin, CreateView):
@@ -103,14 +149,19 @@ class UserCreateView(CreateView):
     template_name = "registration/signup.html"
     success_url = reverse_lazy("login")
 
+
 class UserUpdateView(UpdateView):
     model = User
-    form_class = CustomUserUpdateForm
+    form_class = UserUpdateForm
     template_name = "users/user_update.html"
-    success_url = reverse_lazy("profile")
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy(
+            "users:user-detail", kwargs={"pk": self.request.user.pk}
+        )
 
 
 class UserDeleteView(DeleteView):
@@ -125,8 +176,8 @@ class UserDeleteView(DeleteView):
 class AddBalanceView(LoginRequiredMixin, FormView):
     template_name = "users/add_balance.html"
     form_class = AddBalanceForm
-    def get_success_url(self):
 
+    def get_success_url(self):
         return reverse_lazy(
             "users:user-detail", kwargs={"pk": self.request.user.pk}
         )
@@ -134,10 +185,13 @@ class AddBalanceView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         amount = form.cleaned_data["amount"]
 
-        account = getattr(self.request.user, "account", None)
-        if account is None:
-            account = Account.objects.create(user=self.request.user, balance=0)
+        with transaction.atomic():
+            account = getattr(self.request.user, "account", None)
+            if account is None:
+                account = Account.objects.create(
+                    user=self.request.user, balance=0
+                )
 
-        account.add_money(amount)
+            account.add_money(amount)
 
         return super().form_valid(form)

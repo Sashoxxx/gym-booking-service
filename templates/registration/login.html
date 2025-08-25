@@ -2,25 +2,29 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
+<div class="container py-5 d-flex justify-content-center">
+  <div class="card shadow-sm rounded p-4" style="max-width: 450px; width: 100%;">
+    <h2 class="card-title mb-3 text-center">Login</h2>
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+    {% if form.errors %}
+      <div class="alert alert-danger text-center">
+        Your username and password didn't match. Please try again.
+      </div>
+    {% endif %}
 
-<h1>Login</h1>
+    {% if next %}
+      <p class="text-center mb-3">Please login to see this page.</p>
+    {% endif %}
 
-{% if next %}
-  <p>Please login to see this page.</p>
-{% endif %}
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      {{ form|crispy }}
 
-<form method="post" action="{% url 'login' %}">
-  {% csrf_token %}
-  {{ form|crispy }}
-
-  <div class="d-flex gap-6 mt-3">
-    <input type="submit" value="Login" class="btn btn-primary">
-    <a href="{% url 'users:user-create' %}" class="btn btn-outline-success">Sign up</a>
+      <div class="d-flex justify-content-center gap-2 mt-3">
+        <input type="submit" value="Login" class="btn btn-primary btn-sm">
+        <a href="{% url 'users:user-create' %}" class="btn btn-outline-success btn-sm">Sign up</a>
+      </div>
+    </form>
   </div>
-</form>
-
+</div>
 {% endblock %}

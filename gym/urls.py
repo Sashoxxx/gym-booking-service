@@ -9,7 +9,11 @@ from gym.views import (
     WorkoutSessionCreateView,
     WorkoutSessionUpdateView,
     WorkoutSessionListView,
-    WorkoutSessionDetailView
+    WorkoutSessionDetailView,
+    BookWorkoutSessionView,
+    booking_success_view,
+    WorkoutSessionDeleteView,
+    toggle_gym_status
 )
 
 urlpatterns = [
@@ -34,6 +38,11 @@ urlpatterns = [
         name="gym-update"
     ),
     path(
+        "<int:pk>/toggle-status/",
+        toggle_gym_status,
+        name="gym-toggle-status"
+         ),
+    path(
         "<int:pk>/delete/",
         GymDeleteView.as_view(),
         name="gym-delete"
@@ -44,7 +53,7 @@ urlpatterns = [
         name="workout-session-list"
     ),
     path(
-        "int:gym_pk>/sessions/<int:pk>/",
+        "<int:gym_pk>/sessions/<int:pk>/",
         WorkoutSessionDetailView.as_view(),
         name="workout-session-detail"
     ),
@@ -57,6 +66,21 @@ urlpatterns = [
         "sessions/<int:pk>",
         WorkoutSessionUpdateView.as_view(),
         name="workout-session-update"
+    ),
+    path(
+        "sessions/<int:pk>/delete/",
+        WorkoutSessionDeleteView.as_view(),
+        name="workout-session-delete"
+    ),
+    path(
+        "sessions/<int:session_id>/book/",
+        BookWorkoutSessionView.as_view(),
+        name="book-session"
+    ),
+    path(
+        "booking/<int:booking_id>/success/",
+        booking_success_view,
+        name="booking-success"
     ),
 ]
 

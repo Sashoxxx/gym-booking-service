@@ -12,13 +12,19 @@ class GymAdmin(admin.ModelAdmin):
 
 
     def has_add_permission(self, request):
-        return request.user.is_authenticated and (request.user.role == "admin" or request.user.is_superuser)
+        return request.user.is_authenticated and (
+                request.user.role == "admin" or request.user.is_superuser
+        )
 
     def has_change_permission(self, request, obj=None):
-        return request.user.is_authenticated and (request.user.role == "admin" or request.user.is_superuser)
+        return request.user.is_authenticated and (
+                request.user.role == "admin" or request.user.is_superuser
+        )
 
     def has_delete_permission(self, request, obj=None):
-        return request.user.is_authenticated and (request.user.role == "admin" or request.user.is_superuser)
+        return request.user.is_authenticated and (
+                request.user.role == "admin" or request.user.is_superuser
+        )
 
 
 class BookingInline(admin.TabularInline):
@@ -34,15 +40,19 @@ class WorkoutSessionAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return request.user.is_authenticated and (
-                request.user.is_superuser or request.user.role in ["trainer", "admin"])
+                request.user.is_superuser or request.user.role in ["trainer", "admin"]
+        )
 
     def has_change_permission(self, request, obj=None):
-        if obj is not None and (request.user.role == "trainer" or request.user.is_superuser):
+        if obj is not None and (
+                request.user.role == "trainer" or request.user.is_superuser
+        ):
             return obj.trainer == request.user
         return request.user.role == "admin"
 
     def has_delete_permission(self, request, obj=None):
-        if obj is not None and (request.user.role == "trainer" or request.user.is_superuser):
+        if obj is not None and (
+                request.user.role == "trainer" or request.user.is_superuser
+        ):
             return obj.trainer == request.user
         return request.user.role == "admin"
-

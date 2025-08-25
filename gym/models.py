@@ -109,9 +109,13 @@ class WorkoutSession(models.Model):
             return False
         return True
 
+    @property
+    def paid_bookings_count(self):
+        # Використовуємо аннотоване поле, якщо воно є
+        return getattr(self, "_paid_bookings_count", self.bookings.filter(is_paid=True).count())
+
     def get_available_spots(self):
-        booked_count = self.bookings.filter(is_paid=True).count()
-        return self.max_participants - booked_count
+        return self.max_participants - self.paid_bookings_count
 
     def is_fully_booked(self):
         return self.get_available_spots() <= 0
