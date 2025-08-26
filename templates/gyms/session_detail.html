@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -32,7 +31,7 @@
 
     <div class="text-center mb-3">
       {% if user.is_authenticated and not is_fully_booked and is_active %}
-        <form method="get" action="{% url 'gyms:book-session' session.id %}">
+        <form method="post" action="{% url 'gyms:book-session' session.id %}">
           {% csrf_token %}
           <button type="submit" class="btn btn-primary btn-sm">Book and pay</button>
         </form>
@@ -44,7 +43,9 @@
     <h5 class="mb-2">Clients:</h5>
     <ul class="list-group list-group-flush mb-3">
       {% for booking in session.bookings_with_users %}
-        <li class="list-group-item">{{ booking.user.username }} - {% if is_paid %}Paid{% else %}Pending{% endif %}</li>
+        <li class="list-group-item">
+          {{ booking.user.username }} - {% if booking.is_paid %}Paid{% else %}Pending{% endif %}
+        </li>
       {% empty %}
         <li class="list-group-item">No bookings yet</li>
       {% endfor %}

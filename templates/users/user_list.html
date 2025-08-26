@@ -1,78 +1,221 @@
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{#  <div class="container py-4 d-flex justify-content-center">#}
+{#    <div class="card shadow-sm rounded p-4" style="max-width: 800px; width: 100%;">#}
+{#      <h2 class="card-title mb-4 text-center">Users</h2>#}
+{##}
+{#      <form method="get" class="form-inline mb-3 d-flex gap-2 justify-content-center">#}
+{#        {{ form.search }}#}
+{#        {{ form.role }}#}
+{#        <button type="submit" class="btn btn-primary btn-sm">Search</button>#}
+{#      </form>#}
+{##}
+{#      <div class="table-responsive">#}
+{#        <table class="table table-striped mb-3">#}
+{#          <thead>#}
+{#          <tr>#}
+{#            <th>Username</th>#}
+{#            <th>Email</th>#}
+{#            <th>Role</th>#}
+{#          </tr>#}
+{#          </thead>#}
+{#          <tbody>#}
+{#          {% for user in users %}#}
+{#            <tr>#}
+{#              <td>{{ user.username }}</td>#}
+{#              <td>{{ user.email }}</td>#}
+{#              <td>#}
+{#                {% if user.role == "admin" %}#}
+{#                  🧑‍💻 Admin#}
+{#                {% elif user.role == "trainer" %}#}
+{#                  🏋️ Trainer#}
+{#                {% elif user.role == "client" %}#}
+{#                  👤 Client#}
+{#                {% else %}#}
+{#                  {{ user.role }}#}
+{#                {% endif %}#}
+{#              </td>#}
+{#            </tr>#}
+{#          {% empty %}#}
+{#            <tr>#}
+{#              <td colspan="3" class="text-center">Not found</td>#}
+{#            </tr>#}
+{#          {% endfor %}#}
+{#          </tbody>#}
+{#        </table>#}
+{#      </div>#}
+{##}
+{#      {% if request.user.is_authenticated and request.user.is_superuser %}#}
+{#        <div class="text-center mb-3">#}
+{#          <a href="{% url 'users:create-staff' %}" class="btn btn-success btn-sm">#}
+{#            <i class="bi bi-person-plus"></i> Add staff#}
+{#          </a>#}
+{#        </div>#}
+{#      {% endif %}#}
+{##}
+{#      {% if is_paginated %}#}
+{#        <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">#}
+{#          <ul class="pagination pagination-sm mb-0">#}
+{#            {% if page_obj.has_previous %}#}
+{#              <li class="page-item">#}
+{#                <a class="page-link" href="?#}
+{#                    {% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.previous_page_number }}">Prev</a>#}
+{#              </li>#}
+{#            {% endif %}#}
+{#            <li class="page-item disabled">#}
+{#              <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>#}
+{#            </li>#}
+{#            {% if page_obj.has_next %}#}
+{#              <li class="page-item">#}
+{#                <a class="page-link" href="?#}
+{#                    {% for key, value in request.GET.items %}{% if key != "page" %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.next_page_number }}">Next</a>#}
+{#              </li>#}
+{#            {% endif %}#}
+{#          </ul>#}
+{#        </nav>#}
+{#      {% endif %}#}
+{#    </div>#}
+{#  </div>#}
+{#{% endblock %}#}
+
+
+
+
+
+
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{#<div class="container py-4">#}
+{#  <h2 class="mb-4 text-center">Users</h2>#}
+{##}
+{#  <form method="get" class="d-flex gap-2 justify-content-center mb-3">#}
+{#    {{ form.search }}#}
+{#    {{ form.role }}#}
+{#    <button type="submit" class="btn btn-primary btn-sm">Search</button>#}
+{#  </form>#}
+{##}
+{#  <div class="table-responsive">#}
+{#    <table class="table table-striped mb-3">#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>Username</th>#}
+{#          <th>Email</th>#}
+{#          <th>Role</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for user in users %}#}
+{#          <tr>#}
+{#            <td>{{ user.username }}</td>#}
+{#            <td>{{ user.email }}</td>#}
+{#            <td>#}
+{#              {% if user.role == "admin" %}🧑‍💻 Admin#}
+{#              {% elif user.role == "trainer" %}🏋️ Trainer#}
+{#              {% elif user.role == "client" %}👤 Client#}
+{#              {% else %}{{ user.role }}#}
+{#              {% endif %}#}
+{#            </td>#}
+{#          </tr>#}
+{#        {% empty %}#}
+{#          <tr>#}
+{#            <td colspan="3" class="text-center">Not found</td>#}
+{#          </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  {% if request.user.is_authenticated and request.user.is_superuser %}#}
+{#    <div class="text-center mb-3">#}
+{#      <a href="{% url 'users:create-staff' %}" class="btn btn-success btn-sm">#}
+{#        <i class="bi bi-person-plus"></i> Add staff#}
+{#      </a>#}
+{#    </div>#}
+{#  {% endif %}#}
+{##}
+{#  {% if is_paginated %}#}
+{#    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">#}
+{#      <ul class="pagination pagination-sm mb-0">#}
+{#        {% if page_obj.has_previous %}#}
+{#          <li class="page-item">#}
+{#            <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.previous_page_number }}">Prev</a>#}
+{#          </li>#}
+{#        {% endif %}#}
+{##}
+{#        <li class="page-item disabled">#}
+{#          <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>#}
+{#        </li>#}
+{##}
+{#        {% if page_obj.has_next %}#}
+{#          <li class="page-item">#}
+{#            <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.next_page_number }}">Next</a>#}
+{#          </li>#}
+{#        {% endif %}#}
+{#      </ul>#}
+{#    </nav>#}
+{#  {% endif %}#}
+{#</div>#}
+{#{% endblock %}#}
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container py-4 d-flex justify-content-center">
-  <div class="card shadow-sm rounded p-4" style="max-width: 800px; width: 100%;">
-    <h2 class="card-title mb-4 text-center">Users</h2>
+<div class="container py-4">
+  <h2 class="mb-4 text-center">Users</h2>
 
-    <form method="get" class="form-inline mb-3 d-flex gap-2 justify-content-center">
-      {{ form.search }}
-      {{ form.role }}
-      <button type="submit" class="btn btn-primary btn-sm">Search</button>
-    </form>
+{#  <form method="get" class="d-flex gap-2 justify-content-center mb-3">#}
+{#    {{ form.search }}#}
+{#    {{ form.role }}#}
+{#    <button type="submit" class="btn btn-primary btn-sm">Search</button>#}
+{#  </form>#}
+      <form method="get" class="form-inline mb-3 d-flex gap-2 justify-content">
+        {{ form.search }}
+        {{ form.role }}
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+      </form>
 
-    <div class="table-responsive">
-      <table class="table table-striped mb-3">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for user in users %}
-          <tr>
-            <td>{{ user.username }}</td>
-            <td>{{ user.email }}</td>
-            <td>
-              {% if user.role == 'admin' %}
-                🧑‍💻 Admin
-              {% elif user.role == 'trainer' %}
-                🏋️ Trainer
-              {% elif user.role == 'client' %}
-                👤 Client
-              {% else %}
-                {{ user.role }}
-              {% endif %}
-            </td>
-          </tr>
-          {% empty %}
-          <tr>
-            <td colspan="3" class="text-center">Not found</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    {% if request.user.is_authenticated and request.user.is_superuser %}
-      <div class="text-center mb-3">
-        <a href="{% url 'users:create-staff' %}" class="btn btn-success btn-sm">
-          <i class="bi bi-person-plus"></i> Add staff
-        </a>
-      </div>
-    {% endif %}
-
-    {% if is_paginated %}
-      <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">
-        <ul class="pagination pagination-sm mb-0">
-          {% if page_obj.has_previous %}
-            <li class="page-item">
-              <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.previous_page_number }}">Prev</a>
-            </li>
-          {% endif %}
-          <li class="page-item disabled">
-            <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-          </li>
-          {% if page_obj.has_next %}
-            <li class="page-item">
-              <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.next_page_number }}">Next</a>
-            </li>
-          {% endif %}
-        </ul>
-      </nav>
-    {% endif %}
+  <div class="table-responsive">
+    <table class="table table-striped mb-3">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            {% if user.role == "admin" %}
+              🧑‍💻 Admin
+            {% elif user.role == "trainer" %}
+              🏋️ Trainer
+            {% elif user.role == "client" %}
+              👤 Client
+            {% else %}
+              {{ user.role }}
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3" class="text-center">Not found</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
+
+  {% if request.user.is_authenticated and request.user.is_superuser %}
+  <div class="text-center mb-3">
+    <a href="{% url 'users:create-staff' %}" class="btn btn-success btn-sm">
+      <i class="bi bi-person-plus"></i> Add staff
+    </a>
+  </div>
+  {% endif %}
 </div>
 {% endblock %}

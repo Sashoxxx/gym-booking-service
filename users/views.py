@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import (
 from django.db import transaction
 from django.db.models import Q
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import (
     ListView,
     DetailView,
@@ -34,7 +35,7 @@ class UserListView(PermissionRequiredMixin, ListView):
     model = User
     template_name = "users/user_list.html"
     context_object_name = "users"
-    paginate_by = 20
+    paginate_by = 10
 
     permission_required = "users.view_user"
     raise_exception = True
@@ -62,41 +63,19 @@ class UserListView(PermissionRequiredMixin, ListView):
         return context
 
 class UserDetailView(DetailView):
-    # model = User
-    # template_name = "users/user_detail.html"
-    # context_object_name = "profile_user"
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     user = self.get_object()
-    #     context["username"] = user.username
-    #     context["email"] = user.email
-    #     context["first_name"] = user.first_name
-    #     context["last_name"] = user.last_name
-    #     context["phone_number"] = user.phone_number
-    #     context["role"] = user.get_role_display()
-    #     context["account_balance"] = getattr(user.account, "balance", 0)
-    #
-    #     if user.role == User.Roles.CLIENT:
-    #         context["recent_bookings"] = (
-    #             user.bookings
-    #             .select_related("session", "session__gym")
-    #             .order_by("-created_at")[:5]
-    #         )
-    #
-    #     elif user.role == User.Roles.TRAINER:
-    #         context["recent_sessions"] = (
-    #             user.trainer_sessions
-    #             .select_related("gym")
-    #             .order_by("-start_time")[:5]
-    #         )
-    #     return context
+
     model = User
     template_name = "users/user_detail.html"
     context_object_name = "profile_user"
 
+    def get_queryset(self):
+        return (
+            super()
+            .get_queryset()
+            .select_related("account")
+        )
+
     def get_object(self, queryset=None):
-        # Підтягуємо акаунт разом із користувачем, щоб уникнути додаткового запиту
         queryset = self.model.objects.select_related('account')
         return super().get_object(queryset=queryset)
 
@@ -104,8 +83,8 @@ class UserDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         user = self.object
 
-        # Основна інформація про користувача
         context.update({
+
             "username": user.username,
             "email": user.email,
             "first_name": user.first_name,
@@ -115,15 +94,13 @@ class UserDetailView(DetailView):
             "account_balance": getattr(user.account, "balance", 0),
         })
 
-        # Недавні бронювання для клієнта
         if user.role == User.Roles.CLIENT:
             context["recent_bookings"] = (
                 user.bookings
-                .select_related("session__gym")  # session і gym витягуються одним JOIN
+                .select_related("session__gym")
                 .order_by("-created_at")[:5]
             )
 
-        # Недавні сесії для тренера
         elif user.role == User.Roles.TRAINER:
             context["recent_sessions"] = (
                 user.trainer_sessions

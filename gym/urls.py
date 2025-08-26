@@ -1,5 +1,11 @@
 from django.urls import path
 
+from gym.services.booking_sessions import (
+    BookWorkoutSessionView,
+    booking_success_view,
+    CancelBookingView
+)
+
 from gym.views import (
     GymListView,
     GymDetailView,
@@ -10,8 +16,6 @@ from gym.views import (
     WorkoutSessionUpdateView,
     WorkoutSessionListView,
     WorkoutSessionDetailView,
-    BookWorkoutSessionView,
-    booking_success_view,
     WorkoutSessionDeleteView,
     toggle_gym_status
 )
@@ -81,6 +85,11 @@ urlpatterns = [
         "booking/<int:booking_id>/success/",
         booking_success_view,
         name="booking-success"
+    ),
+    path(
+        "cancel-booking/<int:booking_id>/",
+        CancelBookingView.as_view(),
+        name="cancel-booking"
     ),
 ]
 

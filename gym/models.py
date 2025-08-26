@@ -167,6 +167,8 @@ class Booking(models.Model):
     is_paid = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     paid_at = models.DateTimeField(blank=True, null=True)
+    is_canceled = models.BooleanField(default=False)
+    canceled_at = models.DateTimeField(blank=True, null=True)
 
 
     def clean(self):

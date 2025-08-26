@@ -1,11 +1,29 @@
+# IDE
 .idea/
 .vscode/
 *.iml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environments
 .env
-.DS_Store
 venv/
+
+# OS files
+.DS_Store
+
+# Testing
 .pytest_cache/
-**__pycache__/
+
+# Database
 db.sqlite3
-*.json
+
+# Static files collected
 /staticfiles/
+
+# JSON (тільки якщо не потрібні в репозиторії)
+*.json
