@@ -1,8 +1,10 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
 from users.models import CustomUser
 
+User = get_user_model()
 
 class UserSearchForm(forms.Form):
     ROLE_CHOICES = [
@@ -47,29 +49,20 @@ class StaffUserCreationForm(UserCreationForm):
         return role
 
 class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = CustomUser
-        fields = (
-            "username",
+    email = forms.EmailField(required=True)
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = UserCreationForm.Meta.fields +(
             "first_name",
             "last_name",
             "email",
             "phone_number",
-            "password1",
-            "password2"
         )
-
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.role = CustomUser.Roles.CLIENT
-        if commit:
-            user.save()
-        return user
 
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:
-        model = CustomUser
+        model = User
         fields = (
             "username",
             "first_name",

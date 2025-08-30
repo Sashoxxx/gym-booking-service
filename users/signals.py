@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 
 from .models import Account
-from gym.models import Gym
+
 
 User = get_user_model()
 

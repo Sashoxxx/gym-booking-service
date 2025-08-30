@@ -57,7 +57,7 @@
                   <p class="mb-1 text-success">💳 <strong>Paid:</strong> {{ booking.paid_at }}</p>
                   <a href="{% url 'gyms:cancel-booking' booking.pk %}" class="btn btn-danger btn-sm mt-2">❌ Cancel</a>
                 {% elif booking.is_canceled %}
-                  <p class="text-danger mt-2"><b>Скасовано {{ booking.canceled_at }}</b></p>
+                  <p class="text-danger mt-2"><b>Cancelled at: {{ booking.canceled_at }}</b></p>
                 {% endif %}
 
                 <a href="{% url 'gyms:workout-session-detail' booking.session.gym.pk booking.session.pk %}"
