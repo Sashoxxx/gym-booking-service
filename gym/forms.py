@@ -29,7 +29,7 @@ class WorkoutSessionForm(forms.ModelForm):
 
         self.fields["trainer"].queryset = User.objects.filter(role="trainer")
 
-        if user.role == "trainer":
+        if user.role == User.Roles.TRAINER:
             self.fields["trainer"].widget = forms.HiddenInput()
             self.fields["trainer"].initial = user
             self.fields.pop("clients", None)

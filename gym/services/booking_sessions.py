@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
@@ -8,6 +9,7 @@ from django.views import View
 from gym.models import WorkoutSession, Booking
 from users.models import Account
 
+User = get_user_model()
 
 class BookWorkoutSessionView(LoginRequiredMixin, View):
     """
@@ -25,7 +27,7 @@ class BookWorkoutSessionView(LoginRequiredMixin, View):
     """
     def get(self, request, session_id):
         user = request.user
-        if user.role != "client":
+        if user.role != User.Roles.CLIENT:
             messages.error(request, "Only clients can book workout sessions.")
             session = get_object_or_404(WorkoutSession, id=session_id)
             return redirect("gyms:workout-session-list", gym_pk=session.gym.pk)
@@ -73,7 +75,7 @@ class BookWorkoutSessionView(LoginRequiredMixin, View):
 
     def post(self, request, session_id):
         user = request.user
-        if user.role != "client":
+        if user.role != User.Roles.CLIENT:
             messages.error(request, "Only clients can book workout sessions.")
             session = get_object_or_404(WorkoutSession, id=session_id)
             return redirect("gyms:workout-session-list", gym_pk=session.gym.pk)

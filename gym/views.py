@@ -1,17 +1,15 @@
-from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import (
     PermissionRequiredMixin,
     LoginRequiredMixin,
     UserPassesTestMixin,
 )
-from django.db import transaction
 from django.db.models import Prefetch, Q
 from django.db.models.aggregates import Count
-from django.http import HttpRequest, HttpResponse, Http404
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views import View
 from django.views.generic import (
     ListView,
     DetailView,
@@ -22,8 +20,9 @@ from django.views.generic import (
 
 from gym.forms import WorkoutSessionForm
 from gym.models import Gym, WorkoutSession, Booking
-from users.models import Account
 
+
+User = get_user_model()
 
 def index(request: HttpRequest) -> HttpResponse:
     """
@@ -65,7 +64,7 @@ class GymListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        return Gym.objects.all().prefetch_related("sessions")
+        return Gym.objects.prefetch_related("sessions")
 
 
 class GymDetailView(DetailView):
@@ -74,7 +73,7 @@ class GymDetailView(DetailView):
     context_object_name = "gym"
 
     def get_queryset(self):
-        return Gym.objects.all().prefetch_related("sessions")
+        return Gym.objects.prefetch_related("sessions")
 
 
 class GymCreateView(PermissionRequiredMixin, CreateView):
@@ -196,9 +195,9 @@ class WorkoutSessionUpdateView(
         session = self.get_object()
         user = self.request.user
         return user.is_authenticated and (
-            user.role in ["admin"]
+            user.role in User.Roles.ADMIN
             or user.is_superuser
-            or (user.role == "trainer" and session.trainer == user)
+            or (user.role == User.Roles.TRAINER and session.trainer == user)
         )
 
     def get_success_url(self):
@@ -214,7 +213,7 @@ class WorkoutSessionUpdateView(
     def form_valid(self, form):
         form.instance.gym = self.get_object().gym
 
-        if self.request.user.role == "trainer":
+        if self.request.user.role == User.Roles.TRAINER:
             form.instance.trainer = self.request.user
 
         return super().form_valid(form)
@@ -230,9 +229,9 @@ class WorkoutSessionDeleteView(
         session = self.get_object()
         user = self.request.user
         return user.is_authenticated and (
-            user.role in ["admin"]
-            or user.is_superuser
-            or (user.role == "trainer" and session.trainer == user)
+                user.role in User.Roles.ADMIN
+                or user.is_superuser
+                or (user.role == User.Roles.TRAINER and session.trainer == user)
         )
 
     def get_context_data(self, **kwargs):

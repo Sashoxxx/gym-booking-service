@@ -167,7 +167,6 @@ class Booking(models.Model):
     is_paid = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     paid_at = models.DateTimeField(blank=True, null=True)
-    is_canceled = models.BooleanField(default=False)
     canceled_at = models.DateTimeField(blank=True, null=True)
 
 
@@ -184,6 +183,10 @@ class Booking(models.Model):
         status = "Paid" if self.is_paid else "Pending"
 
         return f"{self.user.username} - {self.session.title} ({status})"
+
+    @property
+    def is_canceled(self):
+        return self.canceled_at is not None
 
     def save(self, *args, **kwargs):
         self.full_clean()
