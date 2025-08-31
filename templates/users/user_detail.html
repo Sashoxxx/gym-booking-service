@@ -40,7 +40,7 @@
     {% endif %}
 
     <!-- Recent Bookings for Clients -->
-    {% if profile_user.role == "client" %}
+    {% if profile_user.role == profile_user.Roles.CLIENT %}
       <h3 class="mb-3">Recent Bookings</h3>
       <div class="row">
         {% for booking in recent_bookings %}
@@ -73,7 +73,7 @@
       </div>
     {% endif %}
 
-    {% if profile_user.role == "trainer" %}
+    {% if profile_user.role == profile_user.Roles.TRAINER %}
       <h3 class="mb-3">Recent Sessions</h3>
       <div class="row">
         {% for session in recent_sessions %}

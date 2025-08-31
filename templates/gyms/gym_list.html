@@ -5,7 +5,7 @@
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Gyms</h2>
     {% if user.is_authenticated %}
-      {% if user.is_superuser or user.role == "admin" %}
+      {% if user.is_superuser or user.role == user.Roles.ADMIN %}
         <a href="{% url 'gyms:gym-create' %}" class="btn btn-success">Add Gym</a>
       {% endif %}
     {% endif %}
@@ -33,7 +33,7 @@
 
             <a href="{% url 'gyms:gym-detail' gym.pk %}" class="btn btn-primary mt-auto">View Details</a>
           {% if user.is_authenticated %}
-  {% if user.is_superuser or user.role == "admin" %}
+  {% if user.is_superuser or user.role == user.Roles.ADMIN %}
     <form action="{% url 'gyms:gym-toggle-status' gym.pk %}" method="post" class="mt-2">
       {% csrf_token %}
       <button type="submit" class="btn {% if gym.is_active %}btn-warning{% else %}btn-success{% endif %} btn-sm">

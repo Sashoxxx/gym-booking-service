@@ -25,11 +25,11 @@
           <td>{{ user.username }}</td>
           <td>{{ user.email }}</td>
           <td>
-            {% if user.role == "admin" %}
+            {% if user.role == user.Roles.ADMIN %}
               🧑‍💻 Admin
-            {% elif user.role == "trainer" %}
+            {% elif user.role == user.Roles.TRAINER %}
               🏋️ Trainer
-            {% elif user.role == "client" %}
+            {% elif user.role == user.Roles.CLIENT %}
               👤 Client
             {% else %}
               {{ user.role }}

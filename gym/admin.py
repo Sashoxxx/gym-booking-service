@@ -1,7 +1,9 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 
 from gym.models import WorkoutSession, Gym, Booking
 
+User = get_user_model()
 
 @admin.register(Gym)
 class GymAdmin(admin.ModelAdmin):
@@ -13,17 +15,17 @@ class GymAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return request.user.is_authenticated and (
-                request.user.role == "admin" or request.user.is_superuser
+                request.user.role == User.Roles.ADMIN or request.user.is_superuser
         )
 
     def has_change_permission(self, request, obj=None):
         return request.user.is_authenticated and (
-                request.user.role == "admin" or request.user.is_superuser
+                request.user.role == User.Roles.ADMIN or request.user.is_superuser
         )
 
     def has_delete_permission(self, request, obj=None):
         return request.user.is_authenticated and (
-                request.user.role == "admin" or request.user.is_superuser
+                request.user.role == User.Roles.ADMIN or request.user.is_superuser
         )
 
 
@@ -45,14 +47,14 @@ class WorkoutSessionAdmin(admin.ModelAdmin):
 
     def has_change_permission(self, request, obj=None):
         if obj is not None and (
-                request.user.role == "trainer" or request.user.is_superuser
+                request.user.role == User.Roles.TRAINER or request.user.is_superuser
         ):
             return obj.trainer == request.user
-        return request.user.role == "admin"
+        return request.user.role == User.Roles.ADMIN
 
     def has_delete_permission(self, request, obj=None):
         if obj is not None and (
-                request.user.role == "trainer" or request.user.is_superuser
+                request.user.role == User.Roles.TRAINER or request.user.is_superuser
         ):
             return obj.trainer == request.user
-        return request.user.role == "admin"
+        return request.user.role == User.Roles.ADMIN
