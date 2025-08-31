@@ -12,19 +12,6 @@ from users.models import Account
 User = get_user_model()
 
 class BookWorkoutSessionView(LoginRequiredMixin, View):
-    """
-    Handles the booking of workout sessions by clients.
-
-    This view class manages the workflow of booking a workout session.
-    It ensures that only clients can book sessions, validates the session's
-    availability, and provides feedback to the user in case of conflicts or errors.
-    The `get` method prepares the booking form and validates the session's state,
-    while the `post` method handles the actual booking transaction, including payment logic.
-
-    Methods:
-        get: Handles HTTP GET requests. Prepares session context for the booking page.
-        post: Handles HTTP POST requests. Processes the booking transaction.
-    """
     def get(self, request, session_id):
         user = request.user
         if user.role != User.Roles.CLIENT:
@@ -48,7 +35,6 @@ class BookWorkoutSessionView(LoginRequiredMixin, View):
             session__start_time__lt=session.end_time,
             session__end_time__gt=session.start_time,
             is_paid=True,
-            is_canceled=False
         ).exists()
 
         existing_booking = Booking.objects.filter(user=user, session=session).first()
@@ -98,7 +84,6 @@ class BookWorkoutSessionView(LoginRequiredMixin, View):
                     session__start_time__lt=session.end_time,
                     session__end_time__gt=session.start_time,
                     is_paid=True,
-                    is_canceled=False
                 ).exists()
                 if overlapping_booking:
                     messages.error(request, "You already have another session booked at this time.")
@@ -107,9 +92,9 @@ class BookWorkoutSessionView(LoginRequiredMixin, View):
                 existing_booking = Booking.objects.filter(user=user, session=session).first()
                 if existing_booking:
                     booking = existing_booking
-                    booking.is_canceled = False
+
                     booking.canceled_at = None
-                    booking.save(update_fields=["is_canceled", "canceled_at"])
+                    booking.save(update_fields=["canceled_at"])
                 else:
                     booking = Booking(user=user, session=session)
                     booking.save()
@@ -143,7 +128,7 @@ class BookWorkoutSessionView(LoginRequiredMixin, View):
 
         except Exception as e:
             messages.error(request, f"An error occurred: {str(e)}")
-            return redirect("gyms:workout-session-list")
+            return redirect("gyms:workout-session-list", gym_pk=session.gym.pk)
 
 
 def booking_success_view(request, booking_id):
@@ -159,20 +144,10 @@ def booking_success_view(request, booking_id):
 
 
 class CancelBookingView(View):
-    """
-    Handles the cancellation of gym session bookings.
-
-    The CancelBookingView class provides methods to display a cancellation confirmation page
-    and process the cancellation of a booking. It checks if the booking is eligible for cancellation
-    based on the time remaining before the session starts, facilitates refunds when applicable,
-    and updates the booking status.
-
-    Attributes:
-        template_name (str): Specifies the template used to display the cancellation confirmation page.
-    """
     template_name = "gyms/cancel_booking_confirm.html"
 
-    def get_booking(self, booking_id, user):
+    @staticmethod
+    def get_booking(booking_id, user):
         return get_object_or_404(
             Booking.objects.select_for_update()
             .select_related("user__account", "session__gym__account"),
@@ -181,12 +156,18 @@ class CancelBookingView(View):
             is_paid=True
         )
 
-    def get(self, request, booking_id):
-        booking = self.get_booking(booking_id, request.user)
+    def _check_cancellation_allowed(self, booking):
         delta_hours = (booking.session.start_time - timezone.now()).total_seconds() / 3600
-
         if delta_hours < 0:
-            messages.error(request, "⚠️ Session already started, cancellation is not possible")
+            messages.error(self.request, "⚠️ Session already started, cancellation is not possible")
+            return False, delta_hours
+        return True, delta_hours
+
+    def get(self, request, booking_id):
+        self.request = request
+        booking = self.get_booking(booking_id, request.user)
+        allowed, delta_hours = self._check_cancellation_allowed(booking)
+        if not allowed:
             return redirect("users:user-detail", pk=request.user.pk)
 
         return render(
@@ -199,14 +180,13 @@ class CancelBookingView(View):
         )
 
     def post(self, request, booking_id):
+        self.request = request
         booking = self.get_booking(booking_id, request.user)
-        delta_hours = (booking.session.start_time - timezone.now()).total_seconds() / 3600
-        now = timezone.now()
-
-        if delta_hours < 0:
-            messages.error(request, "⚠️ Session already started, cancellation is not possible")
+        allowed, delta_hours = self._check_cancellation_allowed(booking)
+        if not allowed:
             return redirect("users:user-detail", pk=request.user.pk)
 
+        now = timezone.now()
         user_account = booking.user.account
         gym_account = booking.session.gym.account
 
@@ -219,8 +199,7 @@ class CancelBookingView(View):
                 messages.warning(request, "❌ Cancellation successful without refund")
 
             booking.is_paid = False
-            booking.is_canceled = True
             booking.canceled_at = now
-            booking.save(update_fields=["is_paid", "is_canceled", "canceled_at"])
+            booking.save(update_fields=["is_paid", "canceled_at"])
 
         return redirect("users:user-detail", pk=request.user.pk)

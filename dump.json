@@ -1,0 +1,1268 @@
+[
+{
+    "model": "users.customuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$fakehash",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "trainer_john",
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "john.trainer@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-22T14:23:24.025Z",
+        "phone_number": null,
+        "role": "trainer",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$fakehash",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "client_anna",
+        "first_name": "Anna",
+        "last_name": "Smith",
+        "email": "anna.client@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-22T14:23:24.028Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$fakehash",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "client_bob",
+        "first_name": "Bob",
+        "last_name": "Brown",
+        "email": "bob.client@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-22T14:23:24.028Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$ssipiLJ1AtRXnvD187ILYr$zyWBBt1+IyzajMHfo6mOTeFq+vx7d/5iyz4uWGcFsAU=",
+        "last_login": "2025-08-31T14:57:11.125Z",
+        "is_superuser": true,
+        "username": "admin.user",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-08-22T14:25:29.672Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 5,
+    "fields": {
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "я",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-22T14:54:09.488Z",
+        "phone_number": "і",
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$gQsMw079BnuLHa3HnSZ19f$8Osj3MKcC6iAJGsYnlVAU43RElXyCLruPoBdlETt+tM=",
+        "last_login": "2025-08-23T14:41:41.208Z",
+        "is_superuser": false,
+        "username": "user",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-23T10:54:58.693Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 7,
+    "fields": {
+        "password": "1qaz2wsx",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "train",
+        "first_name": "valera",
+        "last_name": "valah",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-23T15:50:43Z",
+        "phone_number": null,
+        "role": "trainer",
+        "groups": [],
+        "user_permissions": [
+            38
+        ]
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 8,
+    "fields": {
+        "password": "1qaz1qaz",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "coach",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-23T16:08:07Z",
+        "phone_number": null,
+        "role": "trainer",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 9,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$jEMOijKXsN40ZSJ4eWdiGN$4IF83mMvv0e2GC77rJelrk13jbxOrs9gWCdFcyxueRc=",
+        "last_login": "2025-08-24T15:44:38.487Z",
+        "is_superuser": false,
+        "username": "anton",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-23T16:21:44.795Z",
+        "phone_number": null,
+        "role": "trainer",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 10,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$nxgaPAIqAR7e8ZlzxHCIaN$1laUE1RYvPXhWcAF00cs0p5uBIA1ijnU8yNuhmEafEI=",
+        "last_login": "2025-08-25T16:03:37.620Z",
+        "is_superuser": false,
+        "username": "olexandr",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-24T15:45:32.991Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 11,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$oCvS1Fn6ATmftQlwLKDuoc$wvLzXsTrz3Y4csn4DvKzxH5lW73YP2EXiLPijG/Yoc4=",
+        "last_login": "2025-08-24T16:17:13.639Z",
+        "is_superuser": false,
+        "username": "andre",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-24T16:17:05.568Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 12,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$Sg4wauOk1rl2LyqByg4kh3$LttRo8KK9jibGTdiPVI80kdTNCIwXWTXBndv618fxzk=",
+        "last_login": "2025-08-26T12:51:51.131Z",
+        "is_superuser": false,
+        "username": "uno",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-24T16:28:15.223Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 13,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$3laYCPQqn0tMQrERMllYjW$6INiWy1fNcBts0afv9qSKpibDAgLe3sqDlEOqXepXIc=",
+        "last_login": "2025-08-24T16:36:43.416Z",
+        "is_superuser": false,
+        "username": "red",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-24T16:36:35.778Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 15,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$rXgAqx4YG7lIMEK7CMIXeB$N8bzSlGXcW6f/D295lFM/8/Za19YH5v8siDuPyQLLws=",
+        "last_login": "2025-08-24T19:06:15.945Z",
+        "is_superuser": false,
+        "username": "aaaaa",
+        "first_name": "name",
+        "last_name": "surname",
+        "email": "nema@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-24T19:06:09.376Z",
+        "phone_number": "+380974781508",
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 16,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$G5Gn2eyuxQqIqYCMYn6k05$mt9HohBLjHODFAwJS/633tKeDTE/GGS3Vrsp14RbG9M=",
+        "last_login": "2025-08-31T15:02:21.278Z",
+        "is_superuser": false,
+        "username": "new",
+        "first_name": "sasha",
+        "last_name": "sa",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-26T12:03:05.158Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 17,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$IUfzsMnDEdeTURQQW3vw3X$CD9Z0YapdXBM0CWbSkD50/4EON3bUqCsFWy4Xd0LNdI=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "s",
+        "first_name": "s",
+        "last_name": "s",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-30T15:01:23.017Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 18,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$ycEpNzhfEAyBZm5ZbAOBm4$eP17IfEELqppSPST8rVNVFDCYoOu3x82FTKtzO6lNJc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "fasf",
+        "first_name": "ss",
+        "last_name": "s",
+        "email": "Afaffa@gmail.com",
+        "is_staff": false,
+        "is_active": false,
+        "date_joined": "2025-08-30T16:15:26.861Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 19,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$CHg92Q7OFq4QhWOsgvRFp2$WEf96NtIBrrQY7MWe3Ca7eQjIDggqsQ9sCxbnsE8Vm4=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "fasfa",
+        "first_name": "ss",
+        "last_name": "s",
+        "email": "Afaffa@gmail.com",
+        "is_staff": false,
+        "is_active": false,
+        "date_joined": "2025-08-30T16:16:21.191Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 20,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$UBb91koa6B8TEf1UCVRo9e$1dPvunP/YigcjBo0E7Zk+M/n2iRQmYwVH84BAdksduM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "SASHA_SASHA",
+        "first_name": "",
+        "last_name": "",
+        "email": "metod76580@mogash.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-30T17:29:48.871Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 21,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$DeJAg5mJhsHB1e7CyFoqU5$CyXF8xoPXm/sRBwIf3EM78MqldcVzkcn9nsfTmqK0/k=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Sasha14",
+        "first_name": "",
+        "last_name": "",
+        "email": "metod76580@mogash.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-30T17:38:33.973Z",
+        "phone_number": null,
+        "role": "client",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.account",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "gym": null,
+        "account_type": "user",
+        "balance": 100,
+        "created_at": "2025-08-22T10:05:00Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "gym": null,
+        "account_type": "user",
+        "balance": 50,
+        "created_at": "2025-08-22T10:06:00Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 3,
+    "fields": {
+        "user": 3,
+        "gym": null,
+        "account_type": "user",
+        "balance": 75,
+        "created_at": "2025-08-22T10:07:00Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 4,
+    "fields": {
+        "user": null,
+        "gym": 1,
+        "account_type": "gym",
+        "balance": 850,
+        "created_at": "2025-08-22T10:08:00Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 5,
+    "fields": {
+        "user": 6,
+        "gym": null,
+        "account_type": "user",
+        "balance": 40,
+        "created_at": "2025-08-23T10:54:58.821Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 6,
+    "fields": {
+        "user": 7,
+        "gym": null,
+        "account_type": "user",
+        "balance": 0,
+        "created_at": "2025-08-23T15:52:02.548Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 7,
+    "fields": {
+        "user": 8,
+        "gym": null,
+        "account_type": "user",
+        "balance": 0,
+        "created_at": "2025-08-23T16:08:32.876Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 8,
+    "fields": {
+        "user": 9,
+        "gym": null,
+        "account_type": "user",
+        "balance": 0,
+        "created_at": "2025-08-23T16:21:44.922Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 9,
+    "fields": {
+        "user": 4,
+        "gym": null,
+        "account_type": "user",
+        "balance": 65,
+        "created_at": "2025-08-24T14:41:55Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 10,
+    "fields": {
+        "user": 10,
+        "gym": null,
+        "account_type": "user",
+        "balance": 20,
+        "created_at": "2025-08-24T15:45:33.123Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 11,
+    "fields": {
+        "user": null,
+        "gym": 2,
+        "account_type": "gym",
+        "balance": 122,
+        "created_at": "2025-07-24T14:44:33Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 12,
+    "fields": {
+        "user": 11,
+        "gym": null,
+        "account_type": "user",
+        "balance": 40,
+        "created_at": "2025-08-24T16:17:05.690Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 13,
+    "fields": {
+        "user": 12,
+        "gym": null,
+        "account_type": "user",
+        "balance": 90,
+        "created_at": "2025-08-24T16:28:15.353Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 14,
+    "fields": {
+        "user": 13,
+        "gym": null,
+        "account_type": "user",
+        "balance": 40,
+        "created_at": "2025-08-24T16:36:35.903Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 16,
+    "fields": {
+        "user": 15,
+        "gym": null,
+        "account_type": "user",
+        "balance": 0,
+        "created_at": "2025-08-24T19:06:09.519Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 17,
+    "fields": {
+        "user": 16,
+        "gym": null,
+        "account_type": "user",
+        "balance": 60,
+        "created_at": "2025-08-26T12:03:05.290Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 18,
+    "fields": {
+        "user": 17,
+        "gym": null,
+        "account_type": "user",
+        "balance": 0,
+        "created_at": "2025-08-30T15:01:23.150Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 19,
+    "fields": {
+        "user": 18,
+        "gym": null,
+        "account_type": "user",
+        "balance": 0,
+        "created_at": "2025-08-30T16:15:27.017Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 20,
+    "fields": {
+        "user": 19,
+        "gym": null,
+        "account_type": "user",
+        "balance": 0,
+        "created_at": "2025-08-30T16:16:21.316Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 21,
+    "fields": {
+        "user": 20,
+        "gym": null,
+        "account_type": "user",
+        "balance": 0,
+        "created_at": "2025-08-30T17:29:49.002Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 22,
+    "fields": {
+        "user": 21,
+        "gym": null,
+        "account_type": "user",
+        "balance": 0,
+        "created_at": "2025-08-30T17:38:34.116Z"
+    }
+},
+{
+    "model": "users.account",
+    "pk": 24,
+    "fields": {
+        "user": null,
+        "gym": 7,
+        "account_type": "gym",
+        "balance": 10,
+        "created_at": "2025-08-31T15:01:20.701Z"
+    }
+},
+{
+    "model": "gym.gym",
+    "pk": 1,
+    "fields": {
+        "created_at": "2025-08-22T10:00:00Z",
+        "updated_at": "2025-08-31T14:47:39.364Z",
+        "name": "Power Gym",
+        "address": "123 Main St, City",
+        "capacity": 20,
+        "description": "The best gym in town",
+        "is_active": true
+    }
+},
+{
+    "model": "gym.gym",
+    "pk": 2,
+    "fields": {
+        "created_at": "2025-08-23T10:20:26.911Z",
+        "updated_at": "2025-08-31T14:31:27.128Z",
+        "name": "New_gym",
+        "address": "vovchunetska",
+        "capacity": 100,
+        "description": "",
+        "is_active": true
+    }
+},
+{
+    "model": "gym.gym",
+    "pk": 4,
+    "fields": {
+        "created_at": "2025-08-24T18:01:08.079Z",
+        "updated_at": "2025-08-31T14:31:27.128Z",
+        "name": "Retro",
+        "address": "Main st.",
+        "capacity": 200,
+        "description": "supero",
+        "is_active": true
+    }
+},
+{
+    "model": "gym.gym",
+    "pk": 5,
+    "fields": {
+        "created_at": "2025-08-24T19:08:57.975Z",
+        "updated_at": "2025-08-31T14:31:27.128Z",
+        "name": "New_wave",
+        "address": "John Doe st.",
+        "capacity": 204,
+        "description": "superpuper",
+        "is_active": true
+    }
+},
+{
+    "model": "gym.gym",
+    "pk": 7,
+    "fields": {
+        "created_at": "2025-08-31T15:01:20.698Z",
+        "updated_at": "2025-08-31T15:01:20.698Z",
+        "name": "NEWNEW",
+        "address": "asdfasdfasdfa",
+        "capacity": 300,
+        "description": "",
+        "is_active": true
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 1,
+    "fields": {
+        "created_at": "2025-08-22T10:10:00Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "Morning Yoga",
+        "description": "Relaxing morning yoga session",
+        "gym": 1,
+        "trainer": 1,
+        "start_time": "2025-08-23T08:00:00Z",
+        "end_time": "2025-08-23T09:00:00Z",
+        "price": 15,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 5,
+    "fields": {
+        "created_at": "2025-08-23T15:48:25.207Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "Legs training",
+        "description": "Exercises for legs",
+        "gym": 2,
+        "trainer": 1,
+        "start_time": "2025-08-23T16:48:00Z",
+        "end_time": "2025-08-23T17:48:00Z",
+        "price": 50,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 6,
+    "fields": {
+        "created_at": "2025-08-23T16:25:09.139Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "power",
+        "description": "powerlifting",
+        "gym": 1,
+        "trainer": 9,
+        "start_time": "2025-08-23T17:24:00Z",
+        "end_time": "2025-08-23T18:25:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 7,
+    "fields": {
+        "created_at": "2025-08-23T17:12:03.582Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "Breast",
+        "description": "powerlifting",
+        "gym": 2,
+        "trainer": 7,
+        "start_time": "2025-08-23T17:11:00Z",
+        "end_time": "2025-08-23T18:11:00Z",
+        "price": 100,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 8,
+    "fields": {
+        "created_at": "2025-08-24T16:04:24.746Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "nova",
+        "description": "nova",
+        "gym": 2,
+        "trainer": 9,
+        "start_time": "2025-08-24T18:06:00Z",
+        "end_time": "2025-08-24T20:08:00Z",
+        "price": 10,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 9,
+    "fields": {
+        "created_at": "2025-08-24T17:28:37.070Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "Morning Yoga",
+        "description": "asdfasdfasf",
+        "gym": 1,
+        "trainer": 1,
+        "start_time": "2025-08-24T20:28:00Z",
+        "end_time": "2025-08-25T17:28:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 10,
+    "fields": {
+        "created_at": "2025-08-24T17:42:20.917Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "asdfaafdsf",
+        "description": "dsafasdfasdf",
+        "gym": 2,
+        "trainer": 7,
+        "start_time": "2025-08-24T18:43:00Z",
+        "end_time": "2025-08-24T20:42:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 11,
+    "fields": {
+        "created_at": "2025-08-24T17:42:42.783Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "test",
+        "description": "fffff",
+        "gym": 2,
+        "trainer": 7,
+        "start_time": "2025-08-24T19:42:00Z",
+        "end_time": "2025-08-24T19:42:00Z",
+        "price": 2,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 12,
+    "fields": {
+        "created_at": "2025-08-24T18:35:58.247Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "testtest",
+        "description": "testtest",
+        "gym": 1,
+        "trainer": 8,
+        "start_time": "2025-08-24T20:35:00Z",
+        "end_time": "2025-08-25T18:35:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 13,
+    "fields": {
+        "created_at": "2025-08-24T18:38:03.103Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "testtesttesttest",
+        "description": "testtesttesttest",
+        "gym": 1,
+        "trainer": 9,
+        "start_time": "2025-08-25T18:37:00Z",
+        "end_time": "2025-08-26T18:37:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 14,
+    "fields": {
+        "created_at": "2025-08-25T16:06:30.378Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "Legs training",
+        "description": "Exercises for legs",
+        "gym": 1,
+        "trainer": 9,
+        "start_time": "2025-08-25T19:06:00Z",
+        "end_time": "2025-08-25T20:06:00Z",
+        "price": 25,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 15,
+    "fields": {
+        "created_at": "2025-08-25T16:09:23.323Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "Cardio",
+        "description": "Cardio Training",
+        "gym": 1,
+        "trainer": 9,
+        "start_time": "2025-09-05T16:09:00Z",
+        "end_time": "2025-09-05T17:09:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 16,
+    "fields": {
+        "created_at": "2025-08-26T12:36:14.695Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "yoga",
+        "description": "need to integrate lorem",
+        "gym": 1,
+        "trainer": 7,
+        "start_time": "2025-08-26T13:17:00Z",
+        "end_time": "2025-08-26T14:17:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 17,
+    "fields": {
+        "created_at": "2025-08-26T12:48:18.592Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "one more",
+        "description": "fsdfasdfasdfasfdas",
+        "gym": 1,
+        "trainer": 8,
+        "start_time": "2025-08-26T15:48:00Z",
+        "end_time": "2025-08-26T16:48:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 18,
+    "fields": {
+        "created_at": "2025-08-26T13:06:01.485Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "newnew",
+        "description": "asdnfasjdfkaj;l",
+        "gym": 1,
+        "trainer": 8,
+        "start_time": "2025-08-26T13:05:00Z",
+        "end_time": "2025-08-26T14:05:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 19,
+    "fields": {
+        "created_at": "2025-08-26T13:17:17.130Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "beta",
+        "description": "asdnfasjdfkaj;l",
+        "gym": 1,
+        "trainer": 8,
+        "start_time": "2025-08-27T19:05:00Z",
+        "end_time": "2025-08-27T20:05:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 20,
+    "fields": {
+        "created_at": "2025-08-26T13:17:44.973Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "beta2",
+        "description": "fsadfasfdasd",
+        "gym": 1,
+        "trainer": 9,
+        "start_time": "2025-08-27T19:17:00Z",
+        "end_time": "2025-08-27T20:17:00Z",
+        "price": 10,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 21,
+    "fields": {
+        "created_at": "2025-08-26T13:23:35.961Z",
+        "updated_at": "2025-08-31T14:31:27.131Z",
+        "title": "last",
+        "description": "sdafa;sdfasdf",
+        "gym": 1,
+        "trainer": 7,
+        "start_time": "2025-08-26T14:23:00Z",
+        "end_time": "2025-08-26T15:23:00Z",
+        "price": 20,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 22,
+    "fields": {
+        "created_at": "2025-08-31T14:47:26.515Z",
+        "updated_at": "2025-08-31T14:47:26.515Z",
+        "title": "yoga",
+        "description": "goooooooood",
+        "gym": 1,
+        "trainer": 1,
+        "start_time": "2025-08-31T17:50:00Z",
+        "end_time": "2025-08-31T18:51:00Z",
+        "price": 10,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 23,
+    "fields": {
+        "created_at": "2025-08-31T14:48:09.711Z",
+        "updated_at": "2025-08-31T14:48:09.711Z",
+        "title": "yoga",
+        "description": "afsasdas",
+        "gym": 5,
+        "trainer": 1,
+        "start_time": "2025-08-31T15:48:00Z",
+        "end_time": "2025-08-31T16:48:00Z",
+        "price": 10,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.workoutsession",
+    "pk": 24,
+    "fields": {
+        "created_at": "2025-08-31T15:02:11.410Z",
+        "updated_at": "2025-08-31T15:02:11.410Z",
+        "title": "new",
+        "description": "fdjas;ldfa;sd",
+        "gym": 7,
+        "trainer": 8,
+        "start_time": "2025-08-31T16:01:00Z",
+        "end_time": "2025-08-31T17:02:00Z",
+        "price": 10,
+        "max_participants": 10
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 1,
+    "fields": {
+        "created_at": "2025-08-22T10:15:00Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 2,
+        "session": 1,
+        "is_paid": true,
+        "paid_at": "2025-08-22T10:16:00Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 2,
+    "fields": {
+        "created_at": "2025-08-22T10:20:00Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 3,
+        "session": 1,
+        "is_paid": false,
+        "paid_at": null,
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 9,
+    "fields": {
+        "created_at": "2025-08-24T16:10:59.999Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 10,
+        "session": 8,
+        "is_paid": true,
+        "paid_at": "2025-08-24T16:12:35.767Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 10,
+    "fields": {
+        "created_at": "2025-08-24T16:17:24.352Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 11,
+        "session": 8,
+        "is_paid": true,
+        "paid_at": "2025-08-24T16:17:24.359Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 11,
+    "fields": {
+        "created_at": "2025-08-24T16:29:57.623Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 12,
+        "session": 8,
+        "is_paid": true,
+        "paid_at": "2025-08-24T16:31:55.952Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 12,
+    "fields": {
+        "created_at": "2025-08-24T16:36:54.139Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 13,
+        "session": 8,
+        "is_paid": true,
+        "paid_at": "2025-08-24T16:36:54.144Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 15,
+    "fields": {
+        "created_at": "2025-08-24T17:38:09.135Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 12,
+        "session": 9,
+        "is_paid": true,
+        "paid_at": "2025-08-24T17:38:09.139Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 19,
+    "fields": {
+        "created_at": "2025-08-25T14:09:02.135Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 10,
+        "session": 13,
+        "is_paid": true,
+        "paid_at": "2025-08-25T14:09:02.145Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 20,
+    "fields": {
+        "created_at": "2025-08-25T16:09:42.359Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 10,
+        "session": 15,
+        "is_paid": true,
+        "paid_at": "2025-08-25T16:09:42.363Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 21,
+    "fields": {
+        "created_at": "2025-08-26T12:09:02.629Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 16,
+        "session": 15,
+        "is_paid": false,
+        "paid_at": "2025-08-26T12:09:02.639Z",
+        "canceled_at": "2025-08-26T12:15:54.184Z"
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 22,
+    "fields": {
+        "created_at": "2025-08-26T12:36:52.695Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 16,
+        "session": 16,
+        "is_paid": true,
+        "paid_at": "2025-08-26T13:05:39.004Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 23,
+    "fields": {
+        "created_at": "2025-08-26T12:52:02.265Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 12,
+        "session": 16,
+        "is_paid": true,
+        "paid_at": "2025-08-26T12:52:19.258Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 24,
+    "fields": {
+        "created_at": "2025-08-26T13:06:32.730Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 16,
+        "session": 18,
+        "is_paid": true,
+        "paid_at": "2025-08-26T13:06:32.738Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 25,
+    "fields": {
+        "created_at": "2025-08-26T13:17:58.509Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 16,
+        "session": 19,
+        "is_paid": false,
+        "paid_at": "2025-08-26T14:06:42.235Z",
+        "canceled_at": "2025-08-26T15:22:34.571Z"
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 26,
+    "fields": {
+        "created_at": "2025-08-26T13:24:18.145Z",
+        "updated_at": "2025-08-31T14:31:27.125Z",
+        "user": 16,
+        "session": 21,
+        "is_paid": false,
+        "paid_at": "2025-08-26T13:37:03.388Z",
+        "canceled_at": "2025-08-26T13:37:07.913Z"
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 27,
+    "fields": {
+        "created_at": "2025-08-31T14:54:34.367Z",
+        "updated_at": "2025-08-31T14:55:00.013Z",
+        "user": 16,
+        "session": 22,
+        "is_paid": true,
+        "paid_at": "2025-08-31T14:55:00.005Z",
+        "canceled_at": null
+    }
+},
+{
+    "model": "gym.booking",
+    "pk": 28,
+    "fields": {
+        "created_at": "2025-08-31T15:02:29.041Z",
+        "updated_at": "2025-08-31T15:02:29.048Z",
+        "user": 16,
+        "session": 24,
+        "is_paid": false,
+        "paid_at": "2025-08-31T15:02:29.037Z",
+        "canceled_at": "2025-08-31T15:02:49.600Z"
+    }
+}
+]

@@ -2,8 +2,6 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
-from users.models import CustomUser
-
 User = get_user_model()
 
 class UserSearchForm(forms.Form):
@@ -32,7 +30,7 @@ class UserSearchForm(forms.Form):
 
 class StaffUserCreationForm(UserCreationForm):
     class Meta:
-        model = CustomUser
+        model = User
         fields = (
             "username",
             "email",
@@ -44,7 +42,7 @@ class StaffUserCreationForm(UserCreationForm):
 
     def clean_role(self):
         role = self.cleaned_data.get("role")
-        if role == CustomUser.Roles.CLIENT:
+        if role == User.Roles.CLIENT:
             raise forms.ValidationError("Can create only staff users")
         return role
 

@@ -9,7 +9,10 @@ User = get_user_model()
 
 
 @receiver(post_save, sender=User)
-def create_user_account(sender, instance, created, **kwargs):
+def create_user_account(sender, instance, raw, created, **kwargs):
+    if raw:
+        return
+
     if created:
         Account.objects.create(
             user=instance,

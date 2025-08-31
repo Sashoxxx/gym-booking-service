@@ -6,7 +6,10 @@ from gym.models import Gym
 
 
 @receiver(post_save, sender=Gym)
-def create_gym_account(sender, instance, created, **kwargs):
+def create_gym_account(sender, instance, raw, created, **kwargs):
+    if raw:
+        return
+
     if created:
         Account.objects.get_or_create(
             gym=instance,

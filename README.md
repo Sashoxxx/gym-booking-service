@@ -53,19 +53,20 @@ pip install -r requirements.txt
 ### 4. Configure environment variables
 Create a `.env` file or copy `.env.example` and set:
 ```ini
-DEBUG=True
-SECRET_KEY=your_secret_key
-ALLOWED_HOSTS=127.0.0.1,localhost
+# DJANGO
+SECRET_KEY=django-insecure-CHANGE_ME
+DJANGO_SETTINGS_MODULE=config.settings.dev
 
-# Email configuration (for account activation)
-EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+# DB
+POSTGRES_DB=neondb
+POSTGRES_DB_PORT=5432
+POSTGRES_USER=neondb_owner
+POSTGRES_PASSWORD=CHANGE_ME
+POSTGRES_HOST=localhost
 
-# For production, replace with SMTP settings:
-# EMAIL_HOST=smtp.gmail.com
-# EMAIL_PORT=587
-# EMAIL_HOST_USER=your_email
-# EMAIL_HOST_PASSWORD=your_password
-# EMAIL_USE_TLS=True
+# SMTP
+EMAIL_HOST_USER=example@gmail.com
+EMAIL_HOST_PASSWORD=CHANGE_ME
 ```
 
 ### 5. Apply migrations
@@ -96,14 +97,7 @@ Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
 ### Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `DEBUG` | Enable debug mode | `False` |
-| `SECRET_KEY` | Django secret key | Required |
-| `ALLOWED_HOSTS` | Comma-separated allowed hosts | `localhost,127.0.0.1` |
-| `EMAIL_HOST` | SMTP server host | None |
-| `EMAIL_PORT` | SMTP server port | `587` |
-
+[.env.sample](.env.sample)
 ---
 
 ## 🔑 User Flow

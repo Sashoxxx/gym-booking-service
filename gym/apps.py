@@ -6,4 +6,4 @@ class GymConfig(AppConfig):
     name = "gym"
 
     def ready(self): #noqa
-        import users.signals
+        import gym.signals

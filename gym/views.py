@@ -25,21 +25,6 @@ from gym.models import Gym, WorkoutSession, Booking
 User = get_user_model()
 
 def index(request: HttpRequest) -> HttpResponse:
-    """
-    Handles the display of the index page by retrieving and calculating gym-related
-    statistics and storing session information about the number of user visits.
-
-    Parameters:
-    request (HttpRequest): The HTTP request object containing metadata about
-    the request.
-
-    Returns:
-    HttpResponse: The HTTP response object rendering the "gyms/index.html"
-    template with the context data.
-
-    Raises:
-    None
-    """
     num_visits = request.session.get("num_visits", 1)
     request.session["num_visits"] = num_visits + 1
     num_gyms = Gym.objects.count()

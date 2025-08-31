@@ -32,7 +32,6 @@ from django.views.generic import (
 from users.forms import (
     UserSearchForm,
     CustomUserCreationForm,
-
     AddBalanceForm,
     StaffUserCreationForm,
     UserUpdateForm,
