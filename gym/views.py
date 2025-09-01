@@ -6,16 +6,17 @@ from django.contrib.auth.mixins import (
 )
 from django.db.models import Prefetch, Q
 from django.db.models.aggregates import Count
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpRequest
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.views import View
 from django.views.generic import (
     ListView,
     DetailView,
     DeleteView,
     UpdateView,
-    CreateView,
+    CreateView, TemplateView,
 )
 
 from gym.forms import WorkoutSessionForm
@@ -24,22 +25,29 @@ from gym.models import Gym, WorkoutSession, Booking
 
 User = get_user_model()
 
-def index(request: HttpRequest) -> HttpResponse:
-    num_visits = request.session.get("num_visits", 1)
-    request.session["num_visits"] = num_visits + 1
-    num_gyms = Gym.objects.count()
-    total_trainers = (
-        WorkoutSession.objects.values("trainer").distinct().count()
-    )
-    total_clients = Booking.objects.values("user").distinct().count()
 
-    context = {
-        "num_gyms": num_gyms,
-        "total_trainers": total_trainers,
-        "total_clients": total_clients,
-        "num_visits": num_visits,
-    }
-    return render(request, "gyms/index.html", context)
+class IndexView(TemplateView):
+    template_name = "gyms/index.html"
+
+    def get_context_data(self, **kwargs):
+        request: HttpRequest = self.request
+        context = super().get_context_data(**kwargs)
+
+        num_visits = request.session.get("num_visits", 1)
+        request.session["num_visits"] = num_visits + 1
+
+        num_gyms = Gym.objects.count()
+        total_trainers = WorkoutSession.objects.values("trainer").distinct().count()
+        total_clients = Booking.objects.values("user").distinct().count()
+
+        context.update({
+            "num_gyms": num_gyms,
+            "total_trainers": total_trainers,
+            "total_clients": total_clients,
+            "num_visits": num_visits,
+        })
+
+        return context
 
 
 class GymListView(ListView):
@@ -49,7 +57,7 @@ class GymListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        return Gym.objects.prefetch_related("sessions")
+        return Gym.objects.prefetch_related("sessions").order_by("name")
 
 
 class GymDetailView(DetailView):
@@ -89,11 +97,12 @@ class GymDeleteView(PermissionRequiredMixin, DeleteView):
         return context
 
 
-def toggle_gym_status(request, pk):
-    gym = get_object_or_404(Gym, id=pk)
-    gym.is_active = not gym.is_active
-    gym.save()
-    return redirect("gyms:gym-list")
+class ToggleGymStatusView(View):
+    def post(self, request, pk):
+        gym = get_object_or_404(Gym, id=pk)
+        gym.is_active = not gym.is_active
+        gym.save()
+        return redirect("gyms:gym-list")
 
 
 class WorkoutSessionListView(LoginRequiredMixin, ListView):

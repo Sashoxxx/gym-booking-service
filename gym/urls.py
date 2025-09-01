@@ -17,7 +17,7 @@ from gym.views import (
     WorkoutSessionListView,
     WorkoutSessionDetailView,
     WorkoutSessionDeleteView,
-    toggle_gym_status
+    ToggleGymStatusView
 )
 
 urlpatterns = [
@@ -43,7 +43,7 @@ urlpatterns = [
     ),
     path(
         "<int:pk>/toggle-status/",
-        toggle_gym_status,
+        ToggleGymStatusView.as_view(),
         name="gym-toggle-status"
          ),
     path(
