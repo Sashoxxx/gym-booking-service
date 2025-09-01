@@ -1,8 +1,8 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
-from users.models import CustomUser, Account
-from gym.models import Gym, WorkoutSession, Booking
+from users.models import CustomUser
+from gym.models import Gym, WorkoutSession
 
 class GymViewsTest(TestCase):
     def setUp(self):
@@ -108,6 +108,6 @@ class UserViewsTest(TestCase):
         self.client.force_login(self.client_user)
         url = reverse("users:add-balance")
         response = self.client.post(url, {"amount": 50})
-        self.assertEqual(response.status_code, 302)  # редірект після додавання балансу
+        self.assertEqual(response.status_code, 302)
         self.client_user.account.refresh_from_db()
         self.assertEqual(self.client_user.account.balance, 50)

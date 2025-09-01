@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 from django.core.exceptions import ValidationError
-from users.models import CustomUser, Account
+from users.models import CustomUser
 from gym.models import Gym, WorkoutSession, Booking
 
 class GymModelTest(TestCase):
