@@ -80,7 +80,7 @@ class WorkoutSessionViewsTest(TestCase):
             "trainer": self.trainer.pk
         }
         response = self.client.post(url, data)
-        self.assertEqual(response.status_code, 302)  # редірект після успішного створення
+        self.assertEqual(response.status_code, 302)
         self.assertTrue(WorkoutSession.objects.filter(title="Pilates").exists())
 
 class UserViewsTest(TestCase):
