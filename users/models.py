@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 from django.db import models
 
 from gym.models import Gym
@@ -14,13 +15,21 @@ class CustomUser(AbstractUser):
     phone_number = models.CharField(
         max_length=15,
         blank=True,
-        null=True
+        null=True,
+        validators=[RegexValidator(
+            r"^\+?\d{9,15}$",
+            "Enter a valid phone number.",
+        )],
     )
     role = models.CharField(
         max_length=10,
         choices=Roles,
-        default=Roles.CLIENT)
-
+        default=Roles.CLIENT
+    )
+    email = models.EmailField(
+        blank=True,
+        unique=True,
+    )
 
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})"

@@ -33,6 +33,9 @@ class IndexView(TemplateView):
         request: HttpRequest = self.request
         context = super().get_context_data(**kwargs)
 
+        if not request.session.session_key:
+            request.session.create()
+
         num_visits = request.session.get("num_visits", 1)
         request.session["num_visits"] = num_visits + 1
 
