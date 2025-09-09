@@ -87,7 +87,11 @@ python manage.py runserver
 Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
 ---
+## 🌍 Live Demo
 
+Check out the deployed version here: [Gym Booking Service](https://gym-booking-service.onrender.com/)
+
+___
 ## 🌐 Deployment
 
 ### Production Setup
