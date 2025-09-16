@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-4 text-center">Users</h2>
+
+      <form method="get" class="form-inline mb-3 d-flex gap-2 justify-content">
+        {{ form.search }}
+        {{ form.role }}
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+      </form>
+
+  <div class="table-responsive">
+    <table class="table table-striped mb-3">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            {% if user.role == user.Roles.ADMIN %}
+              🧑‍💻 Admin
+            {% elif user.role == user.Roles.TRAINER %}
+              🏋️ Trainer
+            {% elif user.role == user.Roles.CLIENT %}
+              👤 Client
+            {% else %}
+              {{ user.role }}
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3" class="text-center">Not found</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if request.user.is_authenticated and request.user.is_superuser %}
+  <div class="text-center mb-3">
+    <a href="{% url 'users:create-staff' %}" class="btn btn-success btn-sm">
+      <i class="bi bi-person-plus"></i> Add staff
+    </a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

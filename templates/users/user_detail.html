@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container py-4">
+
+    {% if messages %}
+      <div class="mb-3">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- Personal Info Card -->
+    <div class="card shadow-sm mb-4" style="max-width: 500px; width: 100%;">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">
+          {{ profile_user.username }}
+          <small class="text-light">({{ profile_user.get_role_display }})</small>
+        </h4>
+      </div>
+      <div class="card-body">
+        <p>👤 <b>First name:</b> {{ profile_user.first_name }}</p>
+        <p>👤 <b>Last name:</b> {{ profile_user.last_name }}</p>
+        <p>📧 <b>Email:</b> {{ profile_user.email }}</p>
+        <p>💰 <b>Balance:</b> {{ account_balance }}</p>
+        <p>🗓 <b>Joined:</b> {{ profile_user.date_joined|date:"d M Y" }}</p>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    {% if request.user == profile_user %}
+      <div class="d-flex gap-2 mb-4">
+        <a href="{% url 'users:add-balance' %}" class="btn btn-success btn-sm">💵 Add Balance</a>
+        <a href="{% url 'users:user-update' profile_user.pk %}" class="btn btn-primary btn-sm">✏️ Edit Profile</a>
+        <a href="{% url 'users:user-delete' profile_user.pk %}" class="btn btn-danger btn-sm">🗑 Delete</a>
+      </div>
+    {% endif %}
+
+    <!-- Recent Bookings for Clients -->
+    {% if profile_user.role == profile_user.Roles.CLIENT %}
+      <h3 class="mb-3">Recent Bookings</h3>
+      <div class="row">
+        {% for booking in recent_bookings %}
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">🏋️ {{ booking.session.title }}</h5>
+                <p class="mb-1">🏢 <strong>Gym:</strong> {{ booking.session.gym.name }}</p>
+                <p class="mb-1">📅 <strong>Session Start Time:</strong> {{ booking.session.start_time }}</p>
+                <p class="mb-1">📅 <strong>Session End Time:</strong> {{ booking.session.end_time }}</p>
+                <p class="mb-1">📝 <strong>Booked At:</strong> {{ booking.created_at }}</p>
+
+                {% if booking.is_paid and not booking.is_canceled %}
+                  <p class="mb-1 text-success">💳 <strong>Paid:</strong> {{ booking.paid_at }}</p>
+                  <a href="{% url 'gyms:cancel-booking' booking.pk %}" class="btn btn-danger btn-sm mt-2">❌ Cancel</a>
+                {% elif booking.is_canceled %}
+                  <p class="text-danger mt-2"><b>Cancelled at: {{ booking.canceled_at }}</b></p>
+                {% endif %}
+
+                <a href="{% url 'gyms:workout-session-detail' booking.session.gym.pk booking.session.pk %}"
+                   class="btn btn-primary mt-auto">View Details</a>
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          <div class="col-12">
+            <div class="alert alert-warning text-center">No bookings yet</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if profile_user.role == profile_user.Roles.TRAINER %}
+      <h3 class="mb-3">Recent Sessions</h3>
+      <div class="row">
+        {% for session in recent_sessions %}
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">🏋️ {{ session.title }}</h5>
+                <p class="mb-1">🏢 <strong>Gym:</strong> {{ session.gym.name }}</p>
+                <p class="mb-1">📅 <strong>Start Time:</strong> {{ session.start_time }}</p>
+                <a href="{% url 'gyms:workout-session-detail' session.gym.pk session.pk %}"
+                   class="btn btn-primary mt-auto">View Details</a>
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          <div class="col-12">
+            <div class="alert alert-warning text-center">No sessions yet</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

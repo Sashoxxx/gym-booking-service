@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+<div class="container py-5 d-flex justify-content-center">
+  <div class="card shadow-sm rounded p-4" style="max-width: 450px; width: 100%;">
+    <h2 class="card-title mb-3 text-center">Add Balance</h2>
+    <p class="text-center mb-4">Current balance: <b>{{ request.user.account.balance }}</b></p>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-success btn-sm">Add</button>
+      </div>
+    </form>
+
+    <div class="text-center mt-3">
+      <a href="{% url 'users:user-detail' pk=request.user.pk %}" class="btn btn-secondary btn-sm">Back to Profile</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
